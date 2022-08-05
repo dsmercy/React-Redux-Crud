@@ -1,11 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import Add from './app/components/Add'; 
 import AddEdit from './app/components/AddEdit';
 import List from './app/components/List';
 import Navbar from './app/components/Navbar';
-import Update from './app/components/Update';
 import { fetchEmployeesAsync } from './app/reduxSlices/EmployeeSlice';
 import { useAppDispatch } from './app/store/configureStore';
 
@@ -34,8 +32,7 @@ function App() {
       <Routes>
         <Route path="/" element={<List />} />
         <Route path="/list" element={<List />} />
-        <Route path="/update" element={<Update />} />
-        <Route path="/add" element={<Add />} />
+        <Route path="/addedit" element={<AddEdit />} />
         <Route path="/addedit/:id" element={<AddEdit />} />
       </Routes>
     </>

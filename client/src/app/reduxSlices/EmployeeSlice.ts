@@ -1,5 +1,5 @@
 import { Employee } from '../models/Employee';
-import { createAsyncThunk, createEntityAdapter, createSlice, isAnyOf } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { FieldValues } from "react-hook-form";
 import agent from "../services/agent";
 import { RootState } from '../store/configureStore';

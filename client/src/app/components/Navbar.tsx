@@ -7,13 +7,12 @@ export default function Navbar() {
             <nav className="navbar navbar-inverse">
                 <div className="container-fluid">
                     <div className="navbar-header">
-                        <a className="navbar-brand" href="#">Crud</a>
+                        <Link className="navbar-brand" to="/">Crud</Link>
                     </div>
                     <ul className="nav navbar-nav">
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/list">List</Link></li>
-                        <li><Link to="/add">Add</Link></li>
-                        <li><Link to="/update">Update</Link></li>
+                        <li><Link to="/addedit">Add</Link></li>
                     </ul>
                 </div>
             </nav>

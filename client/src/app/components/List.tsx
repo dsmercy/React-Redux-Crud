@@ -1,26 +1,17 @@
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Employee } from "../models/Employee";
 import { removeEmployeeAsync } from "../reduxSlices/EmployeeSlice";
-import agent from "../services/agent";
 import { useAppDispatch, useAppSelector } from "../store/configureStore";
-import Add from "./Add";
-import Navbar from "./Navbar";
 
 export default function List() {
 
     const { Employees } = useAppSelector(state => state.employee);
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
 
-    async function handleRemoveItem(Id: number) {
+    async function handleRemoveItem(event:any,Id: number) {
+        event.preventDefault();
         await dispatch(removeEmployeeAsync({Id}));
     }
 
-function editAddEmployee(empId:number){
-    let employee = '';
-    navigate(`/edit?id=${empId}`);
-}
 
     return (
         <>
@@ -32,10 +23,10 @@ function editAddEmployee(empId:number){
                                 <div className="col-xs-6">
                                     <h2>Manage <b>Employees</b></h2>
                                 </div>
-                                {/* <div className="col-xs-6">
-                                    <a onClick={toggleAddEmployee} className="btn btn-success" data-toggle="modal"><i className="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
-                                    <a href="#deleteEmployeeModal" className="btn btn-danger" data-toggle="modal"><i className="material-icons">&#xE15C;</i> <span>Delete</span></a>
-                                </div> */}
+                                <div className="col-xs-6">
+                                    <Link to='/addedit' className="btn btn-success" data-toggle="modal"><i className="material-icons">&#xE147;</i> <span>Add New Employee</span></Link>
+                                    {/* <a href="#deleteEmployeeModal" className="btn btn-danger" data-toggle="modal"><i className="material-icons">&#xE15C;</i> <span>Delete</span></a> */}
+                                </div>
                             </div>
                         </div>
                         <table className="table table-striped table-hover">
@@ -57,7 +48,7 @@ function editAddEmployee(empId:number){
                                         <td>{item.phone}</td>
                                         <td>
                                             <Link to={`/addedit/${item.id}`} className="edit" data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></Link>
-                                            <a onClick={()=>handleRemoveItem(item.id)} href='' className="delete" data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                            <button style={{border: 'none',padding: 'unset',backgroundColor: 'inherit'}} onClick={(e)=>handleRemoveItem(e,item.id)} ><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></button>
                                         </td>
                                     </tr>
                                 ))}

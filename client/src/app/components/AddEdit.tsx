@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Employee } from '../models/Employee';
 import { addEmployee, editEmployee } from '../reduxSlices/EmployeeSlice';
 import agent from '../services/agent';
@@ -18,7 +18,7 @@ export default function AddEdit() {
 
   useEffect(() => {
     if (!isAddMode) {
-      // get user and set form fields
+      
       agent.Employee.getEmployee(parseInt(id)).then(user => {
         const fields = ['id', 'name', 'email', 'address', 'phone'];
         fields.forEach(field => setValue(field, user[field]));
@@ -49,9 +49,9 @@ export default function AddEdit() {
     <>
       <div className="modal-dialog">
         <div className="modal-content">
-          <form onSubmit={handleSubmit(onSubmit)} noValidate>
+          <form onSubmit={handleSubmit(onSubmit)} onReset={reset}>
             <div className="modal-header">
-              <h4 className="modal-title">Add Employee</h4>
+              <h4 className="modal-title">{isAddMode?'Add Employee':'Edit Employee'}</h4>
             </div>
             <div className="modal-body">
               <div className="form-group">
@@ -82,8 +82,8 @@ export default function AddEdit() {
               </div>
             </div>
             <div className="modal-footer">
-              <input type="button" className="btn btn-default" value="Reset" />
-              <input type="submit" className="btn btn-success" value="Add" disabled={!isValid} />
+              <Link type="button" className="btn btn-default" to='/' >Cancel</Link>
+              <input type="submit" className="btn btn-success" value={isAddMode?'Add':'Edit'} disabled={!isValid} />
             </div>
           </form>
         </div>
